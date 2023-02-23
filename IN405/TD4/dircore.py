@@ -5,6 +5,9 @@ import tempfile
 import unittest
 
 def mode_octal_to_str(octal_value):
+    if octal_value == 7:
+        
+
     raise NotImplementedError
 
 def mode_str_to_octal(str_value):
