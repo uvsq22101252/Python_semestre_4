@@ -11,6 +11,7 @@ def file_cat(path_in):
         print(read.decode(),end = " ")
         read = os.read(file,16)
     os.close(file)
+    raise NotImplementedError
 
 def file_copy(path_in, path_out):
     file_1 = os.open(path_in,dir_fd=os.O_RDONLY)
@@ -21,10 +22,12 @@ def file_copy(path_in, path_out):
         os.read(file_1, 16)
     os.close(file_1)
     os.close(file_2)
+    raise NotImplementedError
 
 def file_move(path_in, path_out):
     os.link(path_in,path_out)
     os.unlink(path_in)
+    raise NotImplementedError
 
 def file_find(path, filename):
     find = os.listdir(path)
@@ -33,7 +36,7 @@ def file_find(path, filename):
             print(path + "/"+ filename)
         if os.path.isdir(path + "/" + elt) == True:
             file_find(path + "/" + elt, filename)
-        
+    raise NotImplementedError
 
 def file_diff(path_a, path_b):
     file_1 = os.open(path_a,os.O_RDONLY)
@@ -51,6 +54,7 @@ def file_diff(path_a, path_b):
     os.close(file_1)
     os.close(file_2)
     return True
+    raise NotImplementedError
 
 
 def file_sed_char(path, target, modif):
@@ -65,7 +69,7 @@ def file_sed_char(path, target, modif):
         else:
             os.read(target,1)
     os.close(file)
-
+    raise NotImplementedError
 
 
 def file_sed_string(path, target, modif):
@@ -82,6 +86,7 @@ def file_sed_string(path, target, modif):
     file = os.open(path,os.O_WRONLY |os.O_TRUNC) #os.O_TRUNC vide l'intégralité du fichier avant d'ecrire dedans
     os.write(file,info_b)
     os.close(file)
+    raise NotImplementedError
 
 def file_grep_char(path_in, target):
     file = os.open(path_in,os.O_RDONLY)
@@ -89,11 +94,11 @@ def file_grep_char(path_in, target):
     read = os.read(file,1)
     while len(read)!=0 :
         if read == target_b:
-            print(os.lseek(read,-1, os.SEEK_CUR)
+            print(os.lseek(read,-1, os.SEEK_CUR))
         else:
             read = os.read(file,1)
     os.close(file)
-        
+    raise NotImplementedError
         
 
 def file_grep_string(path_in, target):
@@ -114,6 +119,7 @@ def file_grep_line(path_in, target):
     else:
         return False
     
+    raise NotImplementedError
 
     
 
