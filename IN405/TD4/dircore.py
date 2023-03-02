@@ -3,24 +3,36 @@
 import os
 import tempfile
 import unittest
-
+value = "rwxrw----"
 def mode_octal_to_str(octal_value):
-    if octal_value == :
+    list_mode = ["---","--x","-w-","-wx","r--","r-x","rw-","rwx"]
+    mode = ""
+    for i in range(2,5):
+        for j in range(0,len(list_mode)):
+            if octal_value[i]== str(j):
+                mode += list_mode[j]
+    print(mode)
         
-
-    raise NotImplementedError
-
 def mode_str_to_octal(str_value):
-    raise NotImplementedError
+    list_mode = ["---","--x","-w-","-wx","r--","r-x","rw-","rwx"]
+    mode = ""
+    for i in range(0,len(str_value),3):
+        for j in range(0,len(list_mode)):
+            if str_value[i:i+3] == list_mode[j]:
+                mode +=str(j)
+    print(mode)
+
 
 def change_mode(path_in, new_mode):
-    raise NotImplementedError
-
+    os.chmod(path_in,new_mode)
 def touch(path_in):
-    raise NotImplementedError
+    
+    os.utime(path_in,times=os.path.getmtime(path_in))
 
+path= "C:/Users/benji/Documents/Drive L2 semestre 4/L2 semestre 4/LSIN405-système d_exploitation"
 def dir_list(path_in):
-    raise NotImplementedError
+    print(os.listdir(path_in))
+
 
 def dir_all_list(path_in):
     raise NotImplementedError
