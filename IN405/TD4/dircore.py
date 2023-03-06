@@ -3,6 +3,8 @@
 import os
 import tempfile
 import unittest
+import time
+
 value = "rwxrw----"
 def mode_octal_to_str(octal_value):
     list_mode = ["---","--x","-w-","-wx","r--","r-x","rw-","rwx"]
@@ -18,27 +20,46 @@ def mode_str_to_octal(str_value):
     mode = ""
     for i in range(0,len(str_value),3):
         for j in range(0,len(list_mode)):
-            if str_value[i:i+3] == list_mode[j]:
+            if str_value[i:i+3] == list_mode[j]:                
                 mode +=str(j)
     print(mode)
 
 
 def change_mode(path_in, new_mode):
     os.chmod(path_in,new_mode)
+
 def touch(path_in):
     
     os.utime(path_in,times=os.path.getmtime(path_in))
 
 path= "C:/Users/benji/Documents/Drive L2 semestre 4/L2 semestre 4/LSIN405-système d_exploitation"
-def dir_list(path_in):
-    print(os.listdir(path_in))
 
+def dir_list(path_in):
+    files = os.listdir(path_in)
+    for file in files:
+        print(file)
 
 def dir_all_list(path_in):
-    raise NotImplementedError
+    files = os.listdir(path_in)
+    print("# mode user size last_access_time name")
+    for file in files:
+        stat = os.stat(path_in + "/"+ file)
+        print(mode_octal_to_str(stat.st_mode)+"\n")
+        print(stat.st_uid + "\n")
+        print(stat.st_size + "\n")
+        print(time.strftime("%d %b %Y", time.gmtime(stat.st_atime))+"\n")
+        print(file)
 
+
+pathdir = "C:/Users/Benji\Desktop/L2 semestre 4" 
 def dir_rec_list(path_in):
-    raise NotImplementedError
+    files = os.listdir(path_in)
+    print(files)
+    for file in files:
+        if os.path.isdir(file)== True:
+            print(dir_rec_list(path_in + "/" +file))
+
+dir_rec_list(pathdir)
 
 class TestSimpleDirList(unittest.TestCase):
     def test_empty_dir(self):
