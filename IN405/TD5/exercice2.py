@@ -1,20 +1,30 @@
 from multiprocessing import Process
 import os
+import random
+
 def print_hello():
     print("hello World!")
+    print_PID()
+    random_value()
 
-def print_PID(p1,p2):
+def print_PID():
 
-    print("Mon PID est "+str(os.getpid(p1))+" et celui de mon pere/fils est "+str(os.getppid(p2))
+    print("Mon PID est "+str(os.getpid())+" et celui de mon père est "+str(os.getppid()))
+    #os.getpid affiche le pid du fils
+    #os.getppid affiche le pid du père
+def random_value():
+    if os.getpid()!= 0:
+        value = random.randint(0,100)
+        print(value)
 
+
+    
+print_hello()
 
 if __name__ == "__main__":
-    p1 = Process(target=print_hello, args=)
-    p2 = Process(target=print_hello)
+    p1 = Process(target=print_hello)
     #start process
     p1.start()
-    p2.start()
     #wait until process is finished
     p1.join()
-    p2.join()
 
