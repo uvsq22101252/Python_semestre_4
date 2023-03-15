@@ -1,30 +1,23 @@
-from multiprocessing import Process
+from multiprocessing import Process, Queue
 import os
 import random
 
-def print_hello():
+def affichagep(pidf,):
     print("hello World!")
-    print_PID()
-    random_value()
-
-def print_PID():
-
-    print("Mon PID est "+str(os.getpid())+" et celui de mon père est "+str(os.getppid()))
+    print("Mon PID est "+str(os.getpid())+" et celui de mon fils est "+str(pidf))
     #os.getpid affiche le pid du fils
     #os.getppid affiche le pid du père
-def random_value():
-    if os.getpid()!= 0:
-        value = random.randint(0,100)
-        print(value)
+def affichage():
+    print("hello World!")
+    print("Mon PID est "+str(os.getpid())+" et celui de mon père est "+str(os.getppid()))
 
-
-    
-print_hello()
 
 if __name__ == "__main__":
-    p1 = Process(target=print_hello)
-    #start process
+    p1 = Process(target=affichage)
+    
     p1.start()
-    #wait until process is finished
-    p1.join()
+    status=os.wait()
+    pidfils = (status[0])
+    val = status[1]
 
+affichagep(pidfils)
