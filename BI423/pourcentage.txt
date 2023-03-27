@@ -1,0 +1,4 @@
+pourcentage a:10.0
+pourcentage t:20.0
+pourcentage g:40.0
+pourcentage c:30.0
