@@ -12,6 +12,8 @@ def pair_int(sortie):
     os.close(r)
     with os.fdopen(sortie,"w")as f:
         f.write("%d %d" %(random.randint(0,999), random.randint(0,999)))
+
+
 if __name__ == "__main__":
     r,w = os.pipe()
     p1 = mp.Process(target=hello_world, args=[w])
