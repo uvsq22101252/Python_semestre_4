@@ -38,6 +38,7 @@ if __name__ == '__main__':
     locks = [threading.Lock() for _ in range(args.nb_threads + 1)]
     conds = [threading.Condition(locks[i]) for i in range(args.nb_threads + 1)]
     mailbox = (args.nb_threads + 1) * [0]
+    print(mailbox)
     thread_list = [threading.Thread(target=transfer_msg,
                                     args=[i+1, mailbox, locks, conds])
                    for i in range(args.nb_threads)]
